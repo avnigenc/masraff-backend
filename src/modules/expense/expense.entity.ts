@@ -1,9 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import {Column, Entity, ManyToOne} from 'typeorm';
 
 import { AbstractEntity } from '../../common/abstract.entity';
 import { ExpenseDto } from "./dto/ExpenseDto";
-import { CurrencyDto } from "../currency/dto/CurrencyDto";
-import { VATRateDto } from "../vat-rate/dto/VATRateDto";
+import { CurrencyEntity } from "../currency/currency.entity";
+import { VatRateEntity } from "../vat-rate/vat-rate.entity";
 
 
 @Entity({ name: 'expenses' })
@@ -18,11 +18,11 @@ export class ExpenseEntity extends AbstractEntity<ExpenseDto> {
 	@Column({ nullable: false })
 	vatAmount: number;
 
-	@Column({ nullable: false })
-	vatRate: VATRateDto;
+	@ManyToOne(type => VatRateEntity, vatRate =>  vatRate,{ nullable: false })
+	vatRate: VatRateEntity;
 
-	@Column({ nullable: false })
-	currency: CurrencyDto;
+	@ManyToOne(type => CurrencyEntity, currency =>  currency,{ nullable: false })
+	currency: CurrencyEntity;
 
 	@Column({ nullable: false })
 	receiptNo: number;

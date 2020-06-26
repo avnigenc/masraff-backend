@@ -8,11 +8,18 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { ConfigService } from './shared/services/config.service';
 import { SharedModule } from './shared/shared.module';
+import { CurrencyModule } from "./modules/currency/currency.module";
+import { VatRateModule } from "./modules/vat-rate/vat-rate.module";
+import { ExpenseModule } from "./modules/expense/expense.module";
 
 @Module({
     imports: [
-		AuthModule,
+
         UserModule,
+		ExpenseModule,
+		CurrencyModule,
+		VatRateModule,
+		AuthModule,
         TypeOrmModule.forRootAsync({
             imports: [SharedModule],
             useFactory: (configService: ConfigService) =>

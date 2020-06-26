@@ -6,6 +6,8 @@ import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { ExpenseEntity } from '../expense.entity';
 import { CurrencyDto } from "../../currency/dto/CurrencyDto";
 import { VATRateDto } from "../../vat-rate/dto/VATRateDto";
+import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
+import {CurrencyEntity} from "../../currency/currency.entity";
 
 export class ExpenseDto extends AbstractDto {
 
@@ -19,10 +21,10 @@ export class ExpenseDto extends AbstractDto {
 	vatAmount: number;
 
 	@ApiPropertyOptional()
-	vatRate: VATRateDto;
+	vatRate: VatRateEntity;
 
 	@ApiPropertyOptional()
-	currency: CurrencyDto;
+	currency: CurrencyEntity;
 
 	@ApiPropertyOptional()
 	receiptNo: number;

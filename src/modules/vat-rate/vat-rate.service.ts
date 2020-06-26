@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
 
 import { VatRateEntity } from './vat-rate.entity';
-import { CreateCurrencyDto } from "./dto/CreateCurrencyDto";
+import { CreateVATRateDto } from "./dto/CreateVATRateDto";
 import { VatRateRepository } from "./vat-rate.repository";
 
 @Injectable()
 export class VatRateService {
     constructor(
-        public readonly currencyRepository: VatRateRepository
+        public readonly vatRateRepository: VatRateRepository
     ) {}
 
-    async createCurrency(createCurrencyDto: CreateCurrencyDto): Promise<VatRateEntity> {
-        const user = this.currencyRepository.create({ ...createCurrencyDto });
-        return this.currencyRepository.save(user);
+    async createVATRate(createVATRateDto: CreateVATRateDto): Promise<VatRateEntity> {
+        const vatRate = this.vatRateRepository.create({ ...createVATRateDto });
+        return this.vatRateRepository.save(vatRate);
     }
 
 }

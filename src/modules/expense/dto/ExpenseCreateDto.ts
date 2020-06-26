@@ -9,6 +9,8 @@ import {
 } from 'class-validator';
 import { VATRateDto } from "../../vat-rate/dto/VATRateDto";
 import { CurrencyDto } from "../../currency/dto/CurrencyDto";
+import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
+import {CurrencyEntity} from "../../currency/currency.entity";
 
 export class CreateExpenseDto {
 	@IsString()
@@ -29,11 +31,11 @@ export class CreateExpenseDto {
 
 	@IsNotEmpty()
 	@ApiProperty()
-	readonly vatRate: VATRateDto;
+	readonly vatRate: VatRateEntity;
 
 	@IsNotEmpty()
 	@ApiProperty()
-	readonly currency: CurrencyDto;
+	readonly currency: CurrencyEntity;
 
 	@IsNumber()
 	@IsNotEmpty()
