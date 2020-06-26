@@ -5,16 +5,16 @@ import { UserDto } from './dto/UserDto';
 
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity<UserDto> {
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     firstName: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     lastName: string;
 
-    @Column({ unique: true, nullable: true })
+    @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     password: string;
 
     dtoClass = UserDto;
