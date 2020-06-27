@@ -1,4 +1,4 @@
-import { Column, Entity } from 'typeorm';
+import {Column, Entity, OneToMany} from 'typeorm';
 
 import { AbstractEntity } from '../../common/abstract.entity';
 import { CurrencyDto } from './dto/CurrencyDto';

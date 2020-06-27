@@ -1,6 +1,6 @@
 import './boilerplate.polyfill';
 
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {MiddlewareConsumer, Module, NestModule, RequestMethod} from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { contextMiddleware } from './middlewares';
@@ -11,10 +11,11 @@ import { SharedModule } from './shared/shared.module';
 import { CurrencyModule } from "./modules/currency/currency.module";
 import { VatRateModule } from "./modules/vat-rate/vat-rate.module";
 import { ExpenseModule } from "./modules/expense/expense.module";
+import {PublicModule} from "./modules/public/public.module";
 
 @Module({
     imports: [
-
+    	PublicModule,
         UserModule,
 		ExpenseModule,
 		CurrencyModule,
@@ -30,6 +31,7 @@ import { ExpenseModule } from "./modules/expense/expense.module";
 })
 export class AppModule implements NestModule {
     configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {
-        consumer.apply(contextMiddleware).forRoutes('*');
+        consumer.apply(contextMiddleware)
+			.forRoutes('*');
     }
 }

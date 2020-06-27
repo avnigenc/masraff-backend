@@ -14,7 +14,9 @@ services:
     image: postgres
     restart: always
     environment:
-      DB_PASSWORD: postgres
+      POSTGRES_DB: "masraff"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      DB_PASSWORD: genc9707
     ports:
       - "5433:5432"
     volumes:

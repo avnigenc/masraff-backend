@@ -1,14 +1,17 @@
 'use strict';
 
 import {
-    Controller,
-    UseGuards,
-    UseInterceptors,
+	Body,
+	Controller, HttpCode, HttpStatus, Post,
+	UseGuards,
+	UseInterceptors,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
 import { VatRateService } from './vat-rate.service';
+import { VATRateDto } from "./dto/VATRateDto";
+import { CreateVATRateDto } from "./dto/CreateVATRateDto";
 
 @Controller('vatRates')
 @ApiTags('vatRates')
@@ -18,5 +21,11 @@ import { VatRateService } from './vat-rate.service';
 export class VatRateController {
     constructor(private _vatRateService: VatRateService) {}
 
-
+	@Post('create')
+	@HttpCode(HttpStatus.OK)
+	@ApiOkResponse({ type: VATRateDto, description: 'Successfully Created' })
+	async createVatRate(@Body() createVATRateDto: CreateVATRateDto): Promise<VATRateDto> {
+		const createdVatRate = await this._vatRateService.createVATRate(createVATRateDto);
+		return createdVatRate.toDto();
+	}
 }

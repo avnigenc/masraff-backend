@@ -2,13 +2,18 @@
 
 import { ApiProperty } from '@nestjs/swagger';
 import {
-	IsNotEmpty,
-	IsNumber,
+	IsNotEmpty, IsNumber,
 	IsString,
 } from 'class-validator';
-import {Expose} from "class-transformer";
+import { Expose } from "class-transformer";
 
-export class CreateExpenseDto {
+export class UpdateExpenseDto {
+	@IsString()
+	@IsNotEmpty()
+	@ApiProperty()
+	@Expose()
+	readonly id: string;
+
 	@IsString()
 	@IsNotEmpty()
 	@ApiProperty()

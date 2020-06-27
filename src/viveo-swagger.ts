@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication): void {
     const options = new DocumentBuilder()
-        .setTitle('masraff assigment - API')
+        .setTitle('masraff assignment - API')
         .setVersion('0.0.1')
         .addBearerAuth()
         .build();

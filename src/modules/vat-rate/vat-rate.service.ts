@@ -15,4 +15,9 @@ export class VatRateService {
         return this.vatRateRepository.save(vatRate);
     }
 
+	async getAllVatRates(): Promise<any> {
+		return await this.vatRateRepository.find({});
+	}
+
+
 }

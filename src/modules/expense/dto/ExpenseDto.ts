@@ -1,11 +1,9 @@
 'use strict';
 
-import { ApiPropertyOptional} from '@nestjs/swagger';
+import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
 import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { ExpenseEntity } from '../expense.entity';
-import { CurrencyDto } from "../../currency/dto/CurrencyDto";
-import { VATRateDto } from "../../vat-rate/dto/VATRateDto";
 import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
 import {CurrencyEntity} from "../../currency/currency.entity";
 
@@ -37,6 +35,9 @@ export class ExpenseDto extends AbstractDto {
 
 	constructor(expense: ExpenseEntity) {
 		super(expense);
+		this.vatRate = new VatRateEntity();
+		this.currency = new CurrencyEntity();
+
 		this.companyName = expense.companyName;
 		this.totalAmount = expense.totalAmount;
 		this.vatAmount = expense.vatAmount;

@@ -15,4 +15,8 @@ export class CurrencyService {
         return this.currencyRepository.save(user);
     }
 
+	async getAllCurrencies(): Promise<any> {
+		return await this.currencyRepository.find({});
+	}
+
 }
