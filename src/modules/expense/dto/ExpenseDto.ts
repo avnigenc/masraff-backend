@@ -6,6 +6,7 @@ import { AbstractDto } from '../../../common/dto/AbstractDto';
 import { ExpenseEntity } from '../expense.entity';
 import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
 import {CurrencyEntity} from "../../currency/currency.entity";
+import { UserEntity } from '../../user/user.entity';
 
 export class ExpenseDto extends AbstractDto {
 
@@ -25,6 +26,9 @@ export class ExpenseDto extends AbstractDto {
 	currency: CurrencyEntity;
 
 	@ApiPropertyOptional()
+	user: UserEntity;
+
+	@ApiPropertyOptional()
 	receiptNo: number;
 
 	@ApiPropertyOptional()
@@ -37,12 +41,16 @@ export class ExpenseDto extends AbstractDto {
 		super(expense);
 		this.vatRate = new VatRateEntity();
 		this.currency = new CurrencyEntity();
+		this.user = new UserEntity();
 
 		this.companyName = expense.companyName;
 		this.totalAmount = expense.totalAmount;
 		this.vatAmount = expense.vatAmount;
+
 		this.vatRate = expense.vatRate;
 		this.currency = expense.currency;
+		this.user = expense.user;
+
 		this.receiptNo = expense.receiptNo;
 		this.receiptDate = expense.receiptDate;
 		this.expenseDepositDate = expense.expenseDepositDate;

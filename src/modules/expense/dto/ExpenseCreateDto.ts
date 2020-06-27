@@ -39,6 +39,12 @@ export class CreateExpenseDto {
 	@Expose()
 	readonly currency_id: string;
 
+	@IsNotEmpty()
+	@IsString()
+	@ApiProperty()
+	@Expose()
+	readonly user_id: string;
+
 	@IsNumber()
 	@IsNotEmpty()
 	@ApiProperty()
