@@ -10,6 +10,7 @@ import { ExpenseNotFoundException } from "../../exceptions/expense-not-found.exc
 import {PageOptionsDto} from "../../common/dto/PageOptionsDto";
 import {ExpensesPageDto} from "./dto/ExpensesPageDto";
 import {PageMetaDto} from "../../common/dto/PageMetaDto";
+import { UserEntity } from '../user/user.entity';
 
 @Injectable()
 export class ExpenseService {
@@ -22,12 +23,14 @@ export class ExpenseService {
     	let expenseEntity = new ExpenseEntity();
 		expenseEntity.currency = new CurrencyEntity();
 		expenseEntity.vatRate = new VatRateEntity();
+		expenseEntity.user = new UserEntity();
 
 		expenseEntity.companyName = createExpenseDto.companyName;
     	expenseEntity.totalAmount = createExpenseDto.totalAmount;
     	expenseEntity.vatAmount = createExpenseDto.vatAmount;
 		expenseEntity.currency.id = createExpenseDto.currency_id;
-    	expenseEntity.vatRate.id = createExpenseDto.vat_rate_id;
+		expenseEntity.user.id = createExpenseDto.user_id;
+		expenseEntity.vatRate.id = createExpenseDto.vat_rate_id;
     	expenseEntity.receiptDate = createExpenseDto.receiptDate;
     	expenseEntity.receiptNo = createExpenseDto.receiptNo;
     	expenseEntity.expenseDepositDate = createExpenseDto.expenseDepositDate;
@@ -69,6 +72,17 @@ export class ExpenseService {
 	async getAllExpenses(): Promise<any> {
 		return await this.expenseRepository.find({
 			relations: ['vatRate', 'currency']
+		});
+	}
+
+	async getAllExpensesById(id: string): Promise<any> {
+		return await this.expenseRepository.find({
+			where :{
+				user: {
+					id: id,
+				}
+			},
+			relations: ['vatRate', 'currency', 'user']
 		});
 	}
 }

@@ -4,6 +4,7 @@ import { AbstractEntity } from '../../common/abstract.entity';
 import { ExpenseDto } from "./dto/ExpenseDto";
 import { CurrencyEntity } from "../currency/currency.entity";
 import { VatRateEntity } from "../vat-rate/vat-rate.entity";
+import { UserEntity } from '../user/user.entity';
 
 
 @Entity({ name: 'expenses' })
@@ -25,6 +26,10 @@ export class ExpenseEntity extends AbstractEntity<ExpenseDto> {
 	@ManyToOne(() => CurrencyEntity, currency => currency)
 	@JoinColumn({name: 'currency_id'})
 	currency: CurrencyEntity;
+
+	@ManyToOne(() => UserEntity, user => user)
+	@JoinColumn({name: 'user_id'})
+	user: UserEntity;
 
 	@Column({ nullable: false })
 	receiptNo: number;
