@@ -20,6 +20,7 @@ import { UpdateExpenseDto } from "./dto/UpdateExpenseDto";
 import {ExpensesPageDto} from "./dto/ExpensesPageDto";
 import {ExpensesPageOptionsDto} from "./dto/ExpensesPageOptionsDto";
 import {Exclude} from "class-transformer";
+import { GetAllExpensesDto } from './dto/GetAllExpensesDto';
 
 @Controller('expenses')
 @ApiTags('expenses')
@@ -46,4 +47,13 @@ export class ExpenseController {
 		return updatedExpense.toDto();
 	}
 
+	@Post('getAllExpensesById')
+	@HttpCode(HttpStatus.OK)
+	@ApiOkResponse({ type: ExpenseDto, description: 'Successfully Updated' })
+	async getAllExpensesById(@Body() getAllExpensesDto: GetAllExpensesDto, @Res() res): Promise<any> {
+		console.log(getAllExpensesDto);
+		console.log(getAllExpensesDto.user_id);
+		const expenses = await this._expenseService.getAllExpensesById(getAllExpensesDto.user_id);
+		return res.status(HttpStatus.OK).json(expenses);
+	}
 }
