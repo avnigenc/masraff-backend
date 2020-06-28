@@ -5,7 +5,8 @@ import {
 	Controller,
 	HttpCode,
 	HttpStatus,
-	Post, Res,
+	Post,
+	Res,
 	UseGuards,
 	UseInterceptors
 } from '@nestjs/common';

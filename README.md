@@ -36,8 +36,10 @@
 ##### Installation:  
 ```
  git clone https://github.com/avnigenc/masraff-backend
- cd masraff-backend 
- npm install 
+ cd masraff-backend
+ yarn
+ yarn migration:generate init
+ yarn start:dev
  ng serve  
 ```
   
