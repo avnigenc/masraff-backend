@@ -5,9 +5,9 @@ import {
 	Controller,
 	HttpCode,
 	HttpStatus,
-	Post,
+	Post, Res,
 	UseGuards,
-	UseInterceptors,
+	UseInterceptors
 } from '@nestjs/common';
 import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
@@ -27,8 +27,9 @@ export class CurrencyController {
 	@Post('create')
 	@HttpCode(HttpStatus.OK)
 	@ApiOkResponse({ type: CurrencyDto, description: 'Successfully Created' })
-	async createCurrency(@Body() createCurrencyDto: CreateCurrencyDto): Promise<CurrencyDto> {
+	async createCurrency(@Body() createCurrencyDto: CreateCurrencyDto, @Res() res): Promise<CurrencyDto> {
 		const createdCurrency = await this._currencyService.createCurrency(createCurrencyDto);
-		return createdCurrency.toDto();
+		return res.status(HttpStatus.OK).json(createdCurrency);
+
 	}
 }

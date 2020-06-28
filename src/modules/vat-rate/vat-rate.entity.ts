@@ -1,13 +1,32 @@
-import {Column, Entity, OneToMany} from 'typeorm';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	Generated,
+	OneToMany,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn
+} from 'typeorm';
 
-import { AbstractEntity } from '../../common/abstract.entity';
-import { VATRateDto } from './dto/VATRateDto';
-import {ExpenseEntity} from "../expense/expense.entity";
+import { ExpenseEntity } from '../expense/expense.entity';
 
 @Entity({ name: 'vatrates' })
-export class VatRateEntity extends AbstractEntity<VATRateDto> {
+export class VatRateEntity {
+
+	@PrimaryGeneratedColumn()
+	@Generated('increment')
+	id: number;
+
 	@Column({ nullable: false })
 	amount: number;
 
-	dtoClass = VATRateDto;
+	@OneToMany(type => ExpenseEntity, expense => expense.vatRate)
+	expenses: ExpenseEntity[];
+
+	@CreateDateColumn({type: 'timestamptz'})
+	created_at: Date;
+
+	@UpdateDateColumn({type: 'timestamptz'})
+	updated_at: Date;
+
 }

@@ -8,11 +8,10 @@ import {
 import { Expose } from "class-transformer";
 
 export class UpdateExpenseDto {
-	@IsString()
 	@IsNotEmpty()
 	@ApiProperty()
 	@Expose()
-	readonly id: string;
+	readonly id: number;
 
 	@IsString()
 	@IsNotEmpty()
@@ -33,16 +32,14 @@ export class UpdateExpenseDto {
 	readonly vatAmount: number;
 
 	@IsNotEmpty()
-	@IsString()
 	@ApiProperty()
 	@Expose()
-	readonly vat_rate_id: string;
+	readonly vat_rate_id: number;
 
 	@IsNotEmpty()
-	@IsString()
 	@ApiProperty()
 	@Expose()
-	readonly currency_id: string;
+	readonly currency_id: number;
 
 	@IsNumber()
 	@IsNotEmpty()

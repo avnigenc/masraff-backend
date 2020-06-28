@@ -2,9 +2,9 @@
 
 import {
 	Body,
-	Controller, HttpCode, HttpStatus, Post,
+	Controller, HttpCode, HttpStatus, Post, Res,
 	UseGuards,
-	UseInterceptors,
+	UseInterceptors
 } from '@nestjs/common';
 import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
@@ -24,8 +24,8 @@ export class VatRateController {
 	@Post('create')
 	@HttpCode(HttpStatus.OK)
 	@ApiOkResponse({ type: VATRateDto, description: 'Successfully Created' })
-	async createVatRate(@Body() createVATRateDto: CreateVATRateDto): Promise<VATRateDto> {
+	async createVatRate(@Body() createVATRateDto: CreateVATRateDto, @Res() res): Promise<VATRateDto> {
 		const createdVatRate = await this._vatRateService.createVATRate(createVATRateDto);
-		return createdVatRate.toDto();
+		return res.status(HttpStatus.OK).json(createdVatRate);
 	}
 }

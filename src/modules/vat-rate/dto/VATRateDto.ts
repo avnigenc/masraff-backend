@@ -9,8 +9,4 @@ export class VATRateDto extends AbstractDto {
 	@ApiPropertyOptional()
 	amount: number;
 
-	constructor(vatRate: VatRateEntity) {
-		super(vatRate);
-		this.amount = vatRate.amount;
-	}
 }

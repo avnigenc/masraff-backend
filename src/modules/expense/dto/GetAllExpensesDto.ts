@@ -9,8 +9,7 @@ import { Expose } from "class-transformer";
 
 export class GetAllExpensesDto {
 	@IsNotEmpty()
-	@IsString()
 	@ApiProperty()
 	@Expose()
-	readonly user_id: string;
+	readonly user_id: number;
 }

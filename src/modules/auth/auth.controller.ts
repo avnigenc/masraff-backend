@@ -1,12 +1,12 @@
 import {
-    Body,
-    Controller,
-    Get,
-    HttpCode,
-    HttpStatus,
-    Post,
-    UseGuards,
-    UseInterceptors,
+	Body,
+	Controller,
+	Get,
+	HttpCode,
+	HttpStatus,
+	Post, Res,
+	UseGuards,
+	UseInterceptors
 } from '@nestjs/common';
 import {
     ApiBearerAuth,
@@ -39,20 +39,23 @@ export class AuthController {
         type: LoginPayloadDto,
         description: 'User info with access token',
     })
-    async userLogin(@Body() userLoginDto: UserLoginDto): Promise<LoginPayloadDto> {
-        const userEntity = await this.authService.validateUser(userLoginDto);
-
+    async userLogin(@Body() userLoginDto: UserLoginDto, @Res() res): Promise<LoginPayloadDto> {
+        const userEntity = await this.authService.validateUser(userLoginDto)
+		console.log(userEntity);
         const token = await this.authService.createToken(userEntity);
-        return new LoginPayloadDto(userEntity.toDto(), token);
-    }
+		console.log(token);
+        return res.status(HttpStatus.OK).json({ userEntity, token });
+
+	}
 
     @Post('register')
     @HttpCode(HttpStatus.OK)
     @ApiOkResponse({ type: UserDto, description: 'Successfully Registered' })
-    async userRegister(@Body() userRegisterDto: UserRegisterDto): Promise<UserDto> {
+    async userRegister(@Body() userRegisterDto: UserRegisterDto, @Res() res): Promise<UserDto> {
         const createdUser = await this.userService.createUser(userRegisterDto);
-        return createdUser.toDto();
-    }
+		return res.status(HttpStatus.OK).json(createdUser);
+
+	}
 
     @Get('me')
     @HttpCode(HttpStatus.OK)
@@ -60,7 +63,7 @@ export class AuthController {
     @UseInterceptors(AuthUserInterceptor)
     @ApiBearerAuth()
     @ApiOkResponse({ type: UserDto, description: 'current user info' })
-    getCurrentUser(@AuthUser() user: UserEntity) {
-        return user.toDto();
+    getCurrentUser(@AuthUser() user: UserEntity, @Res() res) {
+		return res.status(HttpStatus.OK).json(user);
     }
 }

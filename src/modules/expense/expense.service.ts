@@ -35,7 +35,7 @@ export class ExpenseService {
     	expenseEntity.receiptNo = createExpenseDto.receiptNo;
     	expenseEntity.expenseDepositDate = createExpenseDto.expenseDepositDate;
 
-        let expense = this.expenseRepository.create(expenseEntity)
+        let expense = this.expenseRepository.create(expenseEntity);
         return this.expenseRepository.save(expense);
     }
 
@@ -75,7 +75,7 @@ export class ExpenseService {
 		});
 	}
 
-	async getAllExpensesById(id: string): Promise<any> {
+	async getAllExpensesById(id: number): Promise<any> {
 		return await this.expenseRepository.find({
 			where :{
 				user: {

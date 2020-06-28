@@ -7,6 +7,10 @@ import { ExpenseEntity } from '../expense.entity';
 import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
 import {CurrencyEntity} from "../../currency/currency.entity";
 import { UserEntity } from '../../user/user.entity';
+import { ValidateNested } from 'class-validator';
+import { VATRateDto } from '../../vat-rate/dto/VATRateDto';
+import { CurrencyDto } from '../../currency/dto/CurrencyDto';
+import { UserDto } from '../../user/dto/UserDto';
 
 export class ExpenseDto extends AbstractDto {
 
@@ -20,13 +24,16 @@ export class ExpenseDto extends AbstractDto {
 	vatAmount: number;
 
 	@ApiPropertyOptional()
-	vatRate: VatRateEntity;
+	@ValidateNested({each: true})
+	vatRate: VATRateDto;
 
 	@ApiPropertyOptional()
-	currency: CurrencyEntity;
+	@ValidateNested({each: true})
+	currency: CurrencyDto;
 
 	@ApiPropertyOptional()
-	user: UserEntity;
+	@ValidateNested({each: true})
+	user: UserDto;
 
 	@ApiPropertyOptional()
 	receiptNo: number;
@@ -37,22 +44,4 @@ export class ExpenseDto extends AbstractDto {
 	@ApiPropertyOptional()
 	expenseDepositDate: Date;
 
-	constructor(expense: ExpenseEntity) {
-		super(expense);
-		this.vatRate = new VatRateEntity();
-		this.currency = new CurrencyEntity();
-		this.user = new UserEntity();
-
-		this.companyName = expense.companyName;
-		this.totalAmount = expense.totalAmount;
-		this.vatAmount = expense.vatAmount;
-
-		this.vatRate = expense.vatRate;
-		this.currency = expense.currency;
-		this.user = expense.user;
-
-		this.receiptNo = expense.receiptNo;
-		this.receiptDate = expense.receiptDate;
-		this.expenseDepositDate = expense.expenseDepositDate;
-	}
 }

@@ -1,10 +1,24 @@
-import { Column, Entity } from 'typeorm';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	Generated,
+	OneToMany,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn
+} from 'typeorm';
 
 import { AbstractEntity } from '../../common/abstract.entity';
 import { UserDto } from './dto/UserDto';
+import { ExpenseEntity } from '../expense/expense.entity';
 
 @Entity({ name: 'users' })
-export class UserEntity extends AbstractEntity<UserDto> {
+export class UserEntity  {
+
+	@PrimaryGeneratedColumn()
+	@Generated('increment')
+	id: number;
+
     @Column({ nullable: false })
     firstName: string;
 
@@ -17,5 +31,12 @@ export class UserEntity extends AbstractEntity<UserDto> {
     @Column({ nullable: false })
     password: string;
 
-    dtoClass = UserDto;
+	@OneToMany(type => ExpenseEntity, expense => expense.user)
+	expenses: ExpenseEntity[];
+
+	@CreateDateColumn({type: 'timestamptz'})
+	created_at: Date;
+
+	@UpdateDateColumn({type: 'timestamptz'})
+	updated_at: Date;
 }

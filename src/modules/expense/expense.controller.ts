@@ -3,29 +3,23 @@
 import {
 	Body,
 	Controller,
-	Get,
 	HttpCode,
 	HttpStatus,
-	Post, Query, Res,
+	Post, Res,
 	UseGuards,
-	UseInterceptors, ValidationPipe,
+	UseInterceptors
 } from '@nestjs/common';
-import {ApiBearerAuth, ApiOkResponse, ApiResponse, ApiTags} from '@nestjs/swagger';
+import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import { AuthGuard } from '../../guards/auth.guard';
 import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
 import { ExpenseService } from './expense.service';
 import { CreateExpenseDto } from "./dto/ExpenseCreateDto";
 import { ExpenseDto } from "./dto/ExpenseDto";
 import { UpdateExpenseDto } from "./dto/UpdateExpenseDto";
-import {ExpensesPageDto} from "./dto/ExpensesPageDto";
-import {ExpensesPageOptionsDto} from "./dto/ExpensesPageOptionsDto";
-import {Exclude} from "class-transformer";
 import { GetAllExpensesDto } from './dto/GetAllExpensesDto';
 
 @Controller('expenses')
 @ApiTags('expenses')
-@UseGuards(AuthGuard)
-@UseInterceptors(AuthUserInterceptor)
 @ApiBearerAuth()
 export class ExpenseController {
     constructor(private _expenseService: ExpenseService) {}
@@ -34,17 +28,17 @@ export class ExpenseController {
 	@Post('create')
 	@HttpCode(HttpStatus.OK)
 	@ApiOkResponse({ type: ExpenseDto, description: 'Successfully Created' })
-	async createExpense(@Body() createExpenseDto: CreateExpenseDto): Promise<ExpenseDto> {
+	async createExpense(@Body() createExpenseDto: CreateExpenseDto, @Res() res): Promise<ExpenseDto> {
     	const createdExpense = await this._expenseService.createExpense(createExpenseDto);
-		return createdExpense.toDto();
+		return res.status(HttpStatus.OK).json(createdExpense);
 	}
 
 	@Post('update')
 	@HttpCode(HttpStatus.OK)
 	@ApiOkResponse({ type: ExpenseDto, description: 'Successfully Updated' })
-	async updateExpense(@Body() updateExpenseDto: UpdateExpenseDto): Promise<ExpenseDto> {
+	async updateExpense(@Body() updateExpenseDto: UpdateExpenseDto, @Res() res): Promise<ExpenseDto> {
 		const updatedExpense = await this._expenseService.updateExpense(updateExpenseDto);
-		return updatedExpense.toDto();
+		return res.status(HttpStatus.OK).json(updatedExpense);
 	}
 
 	@Post('getAllExpensesById')
