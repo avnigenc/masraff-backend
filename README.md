@@ -36,7 +36,7 @@
   
 ##### Installation:  
 ```
- git clone https://github.com/avnigenc/masraff-backend
+ git clone https://github.com/avnigenc/masraff-backend.git
  cd masraff-backend
  yarn
 
