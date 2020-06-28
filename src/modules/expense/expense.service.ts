@@ -7,9 +7,6 @@ import { CurrencyEntity } from "../currency/currency.entity";
 import { VatRateEntity } from "../vat-rate/vat-rate.entity";
 import { UpdateExpenseDto } from "./dto/UpdateExpenseDto";
 import { ExpenseNotFoundException } from "../../exceptions/expense-not-found.exception";
-import {PageOptionsDto} from "../../common/dto/PageOptionsDto";
-import {ExpensesPageDto} from "./dto/ExpensesPageDto";
-import {PageMetaDto} from "../../common/dto/PageMetaDto";
 import { UserEntity } from '../user/user.entity';
 
 @Injectable()

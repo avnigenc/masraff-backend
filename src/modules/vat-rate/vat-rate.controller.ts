@@ -2,7 +2,11 @@
 
 import {
 	Body,
-	Controller, HttpCode, HttpStatus, Post, Res,
+	Controller,
+	HttpCode,
+	HttpStatus,
+	Post,
+	Res,
 	UseGuards,
 	UseInterceptors
 } from '@nestjs/common';

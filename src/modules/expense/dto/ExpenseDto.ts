@@ -1,12 +1,8 @@
 'use strict';
 
-import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 import { AbstractDto } from '../../../common/dto/AbstractDto';
-import { ExpenseEntity } from '../expense.entity';
-import {VatRateEntity} from "../../vat-rate/vat-rate.entity";
-import {CurrencyEntity} from "../../currency/currency.entity";
-import { UserEntity } from '../../user/user.entity';
 import { ValidateNested } from 'class-validator';
 import { VATRateDto } from '../../vat-rate/dto/VATRateDto';
 import { CurrencyDto } from '../../currency/dto/CurrencyDto';

@@ -5,13 +5,9 @@ import {
 	Controller,
 	HttpCode,
 	HttpStatus,
-	Post, Res,
-	UseGuards,
-	UseInterceptors
+	Post, Res
 } from '@nestjs/common';
 import {ApiBearerAuth, ApiOkResponse, ApiTags} from '@nestjs/swagger';
-import { AuthGuard } from '../../guards/auth.guard';
-import { AuthUserInterceptor } from '../../interceptors/auth-user-interceptor.service';
 import { ExpenseService } from './expense.service';
 import { CreateExpenseDto } from "./dto/ExpenseCreateDto";
 import { ExpenseDto } from "./dto/ExpenseDto";

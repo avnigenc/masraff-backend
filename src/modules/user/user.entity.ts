@@ -8,8 +8,6 @@ import {
 	UpdateDateColumn
 } from 'typeorm';
 
-import { AbstractEntity } from '../../common/abstract.entity';
-import { UserDto } from './dto/UserDto';
 import { ExpenseEntity } from '../expense/expense.entity';
 
 @Entity({ name: 'users' })
