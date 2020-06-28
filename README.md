@@ -39,6 +39,10 @@
  git clone https://github.com/avnigenc/masraff-backend
  cd masraff-backend
  yarn
+
+ // masraff adında bir db olması gerekiyor
+ psql sheel'inde -> create database "masraff";
+
  yarn migration:generate init
  yarn start:dev
 
