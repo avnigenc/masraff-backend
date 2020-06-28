@@ -45,4 +45,46 @@ export class PublicController {
 			await this._currencyService.getAllCurrencies()
 		);
 	}
+
+	@Get('seedVatRate')
+	@HttpCode(HttpStatus.OK)
+	async seedVatRate(@Res() res): Promise<any> {
+		let message;
+		const vatRateCount = await this._vatRateService.getAllVatRates();
+		if (vatRateCount.length < 3) {
+			const vatRates = [
+				{ amount: 0 },
+				{ amount: 8 },
+				{ amount: 18 }
+			];
+			vatRates.forEach((wr) => {
+				this._vatRateService.createVATRate(wr);
+			});
+			message = 'vat rate seed data created';
+		} else {
+			message = 'already seeded';
+		}
+		return res.status(HttpStatus.OK).json({ message });
+	}
+
+	@Get('seedCurrency')
+	@HttpCode(HttpStatus.OK)
+	async seedCurrency(@Res() res): Promise<any> {
+		let message;
+		const currencyCount = await this._currencyService.getAllCurrencies();
+		if (currencyCount.length < 3) {
+			const currencies = [
+				{ name: 'TRY' },
+				{ name: 'USD' },
+				{ name: 'EUR' }
+			];
+			currencies.forEach((c) => {
+				this._currencyService.createCurrency(c);
+			});
+			message = 'currency seed data created';
+		} else {
+			message = 'already seeded';
+		}
+		return res.status(HttpStatus.OK).json({ message });
+	}
 }
