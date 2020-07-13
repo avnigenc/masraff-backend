@@ -77,11 +77,3 @@ core version             : 7.0.8
 jwt version              : 7.0.0
  
 ```
- 
- - DB Diagram
- 
- ![alt text](https://raw.githubusercontent.com/avnigenc/masraff-backend/354c1c06c24603a67d13effabbebe84705ebf6b5/assets/db-diagram.png?token=AFNAY26BELFGCZNQ3KTAYLS7AFGT6 "DB Diagram")
- 
-- Video eklendi. | https://youtu.be/owdCrKq3FNI
-
-Proje kurulumunda sorun yaşanırsa, kendi bilgisayarımda sunum yapabilirim.
